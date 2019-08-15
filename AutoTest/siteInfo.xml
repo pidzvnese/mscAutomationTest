@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sites>
+	<site>
+		<name>ĐKTP Quy Nhơn</name>
+		<url>http://bvtpquynhon.stc.vn:8889</url>
+	</site>
+	<site>
+		<name>Hồng Hà Hà Tĩnh</name>
+		<url>http://pacshonghaht.stc.vn</url>
+	</site>
+	<site>
+		<name>178 Thái Hà</name>
+		<url>http://pacs178thaiha.stc.vn:178</url>
+	</site>
+	<site>
+		<name>PACS Demo</name>
+		<url>http://pacsdemo.stc.vn</url>
+	</site>
+	<site>
+		<name>PACS Demo 2</name>
+		<url>http://pacsdemo2.stc.vn</url>
+	</site>
+	<site>
+		<name>Y Khoa Thiện Nhân</name>
+		<url>http://ykhoathiennhan.stc.vn</url>
+	</site>
+	<site>
+		<name>Bắc Thăng Long BG</name>
+		<url>http://bacthanglongbg.stc.vn</url>
+	</site>
+	<site>
+		<name>BV Phương Đông (demo)</name>
+		<url>http://pacsphuongdong.stc.vn</url>
+	</site>
+	<site>
+		<name>BV Đức Minh</name>
+		<url>http://pacsducminh.stc.vn</url>
+	</site>
+	<site>
+		<name>PK Thiên An</name>
+		<url>http://thienan.stc.vn</url>
+	</site>
+	<site>
+		<name>BV ĐK TP Thanh Hóa</name>
+		<url>http://bvdktpthanhhoa.stc.vn</url>
+	</site>
+	<site>
+		<name>BV ĐK Hưng Hà</name>
+		<url>http://benhvienhungha.stc.vn</url>
+	</site>
+	<site>
+		<name>BV TW Thái Nguyên</name>
+		<url>http://bvtuthainguyen.stc.vn:8888</url>
+	</site>
+	<site>
+		<name>PK BS Nam</name>
+		<url>http://bsnam.stc.vn</url>
+	</site>
+	<site>
+		<name>BV Gia Đình (Demo)</name>
+		<url>http://familyhospital.stc.vn</url>
+	</site>
+	<site>
+		<name>BV ĐK Tỉnh Hưng Yên</name>
+		<url>http://bvdktinhhungyen.stc.vn/</url>
+	</site>
+	<site>
+		<name>BV Gia Đình</name>
+		<url>http://pacsfhg.stc.vn:1080</url>
+	</site>
+	<site>
+		<name>PK 153 Tuyên Quang</name>
+		<url>http://153tuyenquang.stc.vn</url>
+	</site>
+	<site>
+		<name>PK Thuận An</name>
+		<url>http://pkthuanan.stc.vn</url>
+	</site>
+	<site>
+		<name>BVĐKKV Ngọc Lặc - TH</name>
+		<url>http://bvngoclac.stc.vn/</url>
+	</site>
+	<site>
+		<name>Y Khoa Hà Nội</name>
+		<url>http://ykhoahanoi.stc.vn</url>
+	</site>
+	<site>
+		<name>Tên Bệnh Viện</name>
+		<url>http://tenbenhvien.stc.vn</url>
+	</site>
+	<site>
+		<name>abv</name>
+		<url>aaaaaaaaaaaaasgag</url>
+	</site>
+	<site>
+		<name>aaaaaaaa</name>
+		<url>aaaaaaaaaa</url>
+	</site>
+	<site>
+		<name>aaaaaaaaaaaaa</name>
+		<url>vvvvvvvvvvv</url>
+	</site>
+	<site>
+		<name>dm xung</name>
+		<url>11111</url>
+	</site>
+	<site>
+		<name>xung2</name>
+		<url>aaaaaaaaa</url>
+	</site>
+	<site>
+		<name>xung3</name>
+		<url>a</url>
+	</site>
+	<site>
+		<name>phong test</name>
+		<url>aaaaaaaaa</url>
+	</site>
+	{%newsite%}
+</sites>

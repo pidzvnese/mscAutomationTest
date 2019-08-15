@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="5" name="1_login_testcase">
+	<parameter name = "userName" value="%userName%"/> 
+  	<parameter name = "password" value="%password%"/>
+  	<parameter name = "url" value="%url%"/> 
+  	<parameter name = "maBn" value="%maBn%"/>
+  	<parameter name = "maBnMoi" value="%maBnMoi%"/>
+  	<parameter name = "newName" value="%newName%"/>
+  	<parameter name = "tenBn" value="%tenBn%"/>
+    <classes>
+      <class name="demotest.LoginTest"/>
+    </classes>
+  </test> <!-- 1_login_testcase -->
+</suite> <!-- Suite -->
