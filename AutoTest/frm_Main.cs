@@ -140,7 +140,6 @@ namespace AutoTest
         public string tmpFolder = "";
         private void btnRunTest_Click(object sender, EventArgs e)
         {
-            SpeechRecognitionEngine s = new SpeechRecognitionEngine();
             DateTime today = DateTime.Now;
             tmpFolder = @"temp\" + today.ToShortDateString().Replace(@"/", "");
             if (!Directory.Exists(tmpFolder))
