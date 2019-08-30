@@ -133,7 +133,7 @@ namespace AutoTest
 
         private void frmName_Load(object sender, EventArgs e)
         {
-
+            
         }
         List<string> lstSelTestCase = new List<string>();
         List<string> lstSelSite = new List<string>();
@@ -165,7 +165,18 @@ namespace AutoTest
         {
             bool checkEnterSite = false;
             string text = File.ReadAllText(@"xml\" + xmlName);
-            text = text.Replace("%url%", url).Replace("%maBn%", maBn).Replace("%newName%", newName).Replace("%tenBn%", tenBn).Replace("%maBnMoi%", maBnMoi).Replace("%userName%", userName).Replace("%password%", password);
+            string sleepTime = "";
+            string outTime = "";
+            if (rdSlowTest.Checked)
+            {
+                outTime = "30";
+                sleepTime = "3000";
+            } 
+            if (rdQuickTest.Checked){
+                outTime = "10";
+                sleepTime = "1000";
+            }
+            text = text.Replace("%url%", url).Replace("%maBn%", maBn).Replace("%newName%", newName).Replace("%tenBn%", tenBn).Replace("%maBnMoi%", maBnMoi).Replace("%userName%", userName).Replace("%password%", password).Replace("%timeOut%", outTime).Replace("%sleepTime%", sleepTime);
             string siteName = url.Replace(".", "").Replace(":", "").Replace("/", "").Replace("http","");
             string newFileName = xmlName.Replace("_","").Replace(".","").Replace("xml","") + "-" + siteName;
 
@@ -277,7 +288,7 @@ namespace AutoTest
             string rsPathTmp = "";
             if (Directory.Exists("test-output"))
             {
-                System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(3000);
                 string rsHtml = File.ReadAllText(@"test-output\Suite\" + testCaseName + ".html");
                 if (rsHtml.Contains("PASSED TESTS"))
                 {
@@ -289,7 +300,11 @@ namespace AutoTest
                     result = "fail";
                     string folderLog = "test-output" + tmpNumber;
                     string logPath =@"result\" + folderLog;
-
+                    if (rsHtml.Contains("no such element: Unable to locate element:") && rsHtml.Contains("input[@id='LoginUser_UserName']"))
+                    {
+                        rsHtml = rsHtml.Replace("org.openqa.selenium.NoSuchElementException", "Lỗi server hoặc tên miền");
+                        File.WriteAllText(@"test-output\Suite\" + testCaseName + ".html", rsHtml);
+                    }
                     if (!Directory.Exists(logPath))
                     {
                         Directory.Move(@"test-output", logPath);
@@ -367,14 +382,14 @@ namespace AutoTest
             
             Dictionary<string, List<Result>> resultFinal = new Dictionary<string, List<Result>>();
             int count = 0;
-            statusCountSite.Text = count.ToString();
-            statusTotalSite.Text = "/ " + lstSelSite.Count.ToString();
+            statusSiteFinished.Text = count.ToString();
+            statusTotalTestSite.Text = "/ " + lstSelSite.Count.ToString();
             for (int t = 0; t < lstSelSite.Count; t++)
             {
 
                 string siteUrl = null;
                 string siteName = lstSelSite[t];
-                statusSiteRunning.Text = siteName;
+                statusSiteRunningT.Text = siteName;
                 if (listSite.ContainsKey(siteName))
                 {
                     
@@ -419,11 +434,14 @@ namespace AutoTest
                     lstSelTestCase.Clear();
                 }
                 count++;
-                statusCountSite.Text = count.ToString();
+                statusSiteFinished.Text = count.ToString();
                 Console.WriteLine(siteName + "\t" + siteUrl);
             }
             //render kết quả test
+            String headHtmlResult = null;
             String htmlResult = null;
+            String headTable = null;
+            int ap = 0;
             foreach (KeyValuePair<string, List<Result>> item in resultFinal)
             {
                 Console.WriteLine(item.Key + "\t" + item.Value);
@@ -431,6 +449,8 @@ namespace AutoTest
                 List<Result> listResult = item.Value;
 
                 String table = null;
+
+                int p = 0;
                 for (int c = 0; c < listResult.Count; c++)
                 {
                     Result kq = new Result();
@@ -441,7 +461,7 @@ namespace AutoTest
                     string urlRst = kq.ResultUrl;
                     if (kqTest.Contains("pass"))
                     {
-
+                        p++;
                     }
                     else
                     {
@@ -454,14 +474,34 @@ namespace AutoTest
                         table += "<tr><td>" + testName + "</td><td style=\"color:red;\">" + kqTest + "</td><td>" + "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + urlRst + "\">Xem lỗi</a>" + "</td></tr>";
                     }
                 }
-                htmlResult += table;
-                htmlResult += "</tbody></table>";
+                if (table != null)
+                {
+                    htmlResult += table;
+                    htmlResult += "</tbody></table>";
+                }
+                if (listResult.Count == p && table == null)
+                {
+                    ap++;
+                }
 
             }
+
+            if (ap == resultFinal.Count)
+            {
+                headHtmlResult += "<p class='pass'>All pass</p>";
+            }
+            headHtmlResult += "<center><table class=\"table table-bordered kq\"><thead><tr><th>Thành công</th><th>Thất bai</th></tr></thead><tbody>";
+            headTable += "<tr><td style=\"color:green;\">" + ap + "</td><td style=\"color:red;\">" + (resultFinal.Count - ap) + "</td></tr>";
+            headHtmlResult += headTable;
+            headHtmlResult += "</tbody></table><c/enter>";
             string text = File.ReadAllText("result.html");
+            text = text.Replace("{countSite}", resultFinal.Count.ToString());
+            text = text.Replace("{headResult}", headHtmlResult);
             text = text.Replace("{result}", htmlResult);
             File.WriteAllText(@"result\result.html", text);
             System.Diagnostics.Process.Start("Chrome", Uri.EscapeDataString(@"result\result.html"));
+            lstSelTestCase.Clear();
+            lstSelSite.Clear();
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)

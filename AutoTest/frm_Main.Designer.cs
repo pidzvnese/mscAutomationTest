@@ -39,8 +39,6 @@
             this.txtMaBnDoc = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.clSiteUrl = new System.Windows.Forms.CheckedListBox();
-            this.cbRunSequence = new System.Windows.Forms.CheckBox();
-            this.cbRunAll = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -51,14 +49,23 @@
             this.label9 = new System.Windows.Forms.Label();
             this.cbSelectAll = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusCountSite = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusTotalSite = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusSiteRunning = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnAddSite = new System.Windows.Forms.Button();
             this.btnAddTestCase = new System.Windows.Forms.Button();
+            this.rdSlowTest = new System.Windows.Forms.RadioButton();
+            this.rdQuickTest = new System.Windows.Forms.RadioButton();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusSiteFinished = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusTotalTestSite = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusSiteRunningT = new System.Windows.Forms.ToolStripStatusLabel();
             this.grLogin.SuspendLayout();
             this.grInfo.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -156,28 +163,6 @@
             this.clSiteUrl.Name = "clSiteUrl";
             this.clSiteUrl.Size = new System.Drawing.Size(244, 169);
             this.clSiteUrl.TabIndex = 8;
-            // 
-            // cbRunSequence
-            // 
-            this.cbRunSequence.AutoSize = true;
-            this.cbRunSequence.Enabled = false;
-            this.cbRunSequence.Location = new System.Drawing.Point(299, 321);
-            this.cbRunSequence.Name = "cbRunSequence";
-            this.cbRunSequence.Size = new System.Drawing.Size(87, 17);
-            this.cbRunSequence.TabIndex = 9;
-            this.cbRunSequence.Text = "Chạy lần lượt";
-            this.cbRunSequence.UseVisualStyleBackColor = true;
-            // 
-            // cbRunAll
-            // 
-            this.cbRunAll.AutoSize = true;
-            this.cbRunAll.Enabled = false;
-            this.cbRunAll.Location = new System.Drawing.Point(414, 321);
-            this.cbRunAll.Name = "cbRunAll";
-            this.cbRunAll.Size = new System.Drawing.Size(89, 17);
-            this.cbRunAll.TabIndex = 9;
-            this.cbRunAll.Text = "Chạy toàn bộ";
-            this.cbRunAll.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -280,20 +265,11 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // statusStrip1
+            // toolStripStatusLabel1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.statusCountSite,
-            this.statusTotalSite,
-            this.toolStripStatusLabel2,
-            this.statusSiteRunning});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 469);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(733, 22);
-            this.statusStrip1.TabIndex = 23;
-            this.statusStrip1.Text = "statusStrip1";
-            this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(63, 17);
+            this.toolStripStatusLabel1.Text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
             // 
             // statusCountSite
             // 
@@ -304,12 +280,6 @@
             // 
             this.statusTotalSite.Name = "statusTotalSite";
             this.statusTotalSite.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(63, 17);
-            this.toolStripStatusLabel1.Text = "Tiến trình: ";
             // 
             // toolStripStatusLabel2
             // 
@@ -343,21 +313,97 @@
             this.btnAddTestCase.UseVisualStyleBackColor = true;
             this.btnAddTestCase.Click += new System.EventHandler(this.btnAddTestCase_Click);
             // 
+            // rdSlowTest
+            // 
+            this.rdSlowTest.AutoSize = true;
+            this.rdSlowTest.Checked = true;
+            this.rdSlowTest.Location = new System.Drawing.Point(320, 308);
+            this.rdSlowTest.Name = "rdSlowTest";
+            this.rdSlowTest.Size = new System.Drawing.Size(75, 17);
+            this.rdSlowTest.TabIndex = 25;
+            this.rdSlowTest.TabStop = true;
+            this.rdSlowTest.Text = "Test chậm";
+            this.rdSlowTest.UseVisualStyleBackColor = true;
+            // 
+            // rdQuickTest
+            // 
+            this.rdQuickTest.AutoSize = true;
+            this.rdQuickTest.Location = new System.Drawing.Point(320, 331);
+            this.rdQuickTest.Name = "rdQuickTest";
+            this.rdQuickTest.Size = new System.Drawing.Size(79, 17);
+            this.rdQuickTest.TabIndex = 25;
+            this.rdQuickTest.TabStop = true;
+            this.rdQuickTest.Text = "Test nhanh";
+            this.rdQuickTest.UseVisualStyleBackColor = true;
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel4.Text = "toolStripStatusLabel4";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel5,
+            this.statusSiteFinished,
+            this.statusTotalTestSite,
+            this.toolStripStatusLabel6,
+            this.statusSiteRunningT});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 469);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(733, 22);
+            this.statusStrip1.TabIndex = 26;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(66, 17);
+            this.toolStripStatusLabel5.Text = "Tiến trình : ";
+            // 
+            // statusSiteFinished
+            // 
+            this.statusSiteFinished.Name = "statusSiteFinished";
+            this.statusSiteFinished.Size = new System.Drawing.Size(0, 17);
+            // 
+            // statusTotalTestSite
+            // 
+            this.statusTotalTestSite.Name = "statusTotalTestSite";
+            this.statusTotalTestSite.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(87, 17);
+            this.toolStripStatusLabel6.Text = "Site đang test : ";
+            // 
+            // statusSiteRunningT
+            // 
+            this.statusSiteRunningT.Name = "statusSiteRunningT";
+            this.statusSiteRunningT.Size = new System.Drawing.Size(0, 17);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(733, 491);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.rdQuickTest);
+            this.Controls.Add(this.rdSlowTest);
             this.Controls.Add(this.btnAddTestCase);
             this.Controls.Add(this.btnAddSite);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.cbSelectAll);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grInfo);
             this.Controls.Add(this.grLogin);
-            this.Controls.Add(this.cbRunAll);
-            this.Controls.Add(this.cbRunSequence);
             this.Controls.Add(this.clSiteUrl);
             this.Controls.Add(this.btnRunTest);
             this.Controls.Add(this.lstTestCase);
@@ -388,8 +434,6 @@
         private System.Windows.Forms.TextBox txtMaBnDoc;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckedListBox clSiteUrl;
-        private System.Windows.Forms.CheckBox cbRunSequence;
-        private System.Windows.Forms.CheckBox cbRunAll;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TextBox txtPassword;
@@ -400,7 +444,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox cbSelectAll;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusCountSite;
         private System.Windows.Forms.ToolStripStatusLabel statusTotalSite;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -408,6 +451,16 @@
         private System.Windows.Forms.ToolStripStatusLabel statusSiteRunning;
         private System.Windows.Forms.Button btnAddSite;
         private System.Windows.Forms.Button btnAddTestCase;
+        private System.Windows.Forms.RadioButton rdSlowTest;
+        private System.Windows.Forms.RadioButton rdQuickTest;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel statusSiteFinished;
+        private System.Windows.Forms.ToolStripStatusLabel statusTotalTestSite;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel statusSiteRunningT;
     }
 }
 
