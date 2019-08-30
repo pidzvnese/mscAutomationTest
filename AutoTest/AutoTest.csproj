@@ -82,12 +82,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include=".settings\org.eclipse.core.resources.prefs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include=".settings\org.eclipse.jdt.core.prefs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="class\demotest\ChoosePatient.class">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

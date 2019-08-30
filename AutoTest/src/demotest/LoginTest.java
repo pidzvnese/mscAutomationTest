@@ -52,9 +52,9 @@ public class LoginTest
 	By boloctimkiem = By.xpath("//a[@id='root1_anchor']");
 	By suathongtincachup = By.xpath("//ul[contains(@style,'width')]//li[text()=' Sửa thông tin ca chụp']");
 
-	@Parameters({"url"})
+	@Parameters({"url", "timeOut"})
 	@BeforeClass
-	public void beforeClass(String url) 
+	public void beforeClass(String url, String timeOut) 
 	{
 		System.setProperty("webdriver.chrome.driver", "lib\\chromedriver.exe");
 		// 1. Open browser
@@ -63,36 +63,36 @@ public class LoginTest
 		driver.get(url);
 		driver.manage().window().maximize();
 		// wait for element visible 30s
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Integer.valueOf(timeOut), TimeUnit.SECONDS);
 
 		js = (JavascriptExecutor) driver;
 	}
 
-	// Test case 1: Đăng nhập sai
+	// Test case 1: Ä�Äƒng nháº­p sai
+	@Parameters({"sleepTime"})
 	@Test
-	public void tc_01_Login_With_Empty_Field() 
+	public void tc_01_Login_With_Empty_Field(String sleepTime) 
 	throws InterruptedException 
 	{
 		driver.findElement(usernametxt).sendKeys("");
 		driver.findElement(passwordtxt).sendKeys("");
-		Thread.sleep(500);
+		Thread.sleep(Integer.valueOf(sleepTime));
 		driver.findElement(loginbtn).click();
 		System.out.println(driver.findElement(errormsg).getText());
 		Assert.assertTrue(driver.findElement(errormsg).isDisplayed());
 		Assert.assertEquals(driver.findElement(errormsg).getText(), "Sai tên đăng nhập hoặc mật khẩu.");
 	}
 
-	// Test case 2: Đăng nhập thông tin đúng
-	@Parameters({"userName", "password"})
+	// Test case 2: Ä�Äƒng nháº­p thÃ´ng tin Ä‘Ãºng
+	@Parameters({"userName", "password", "sleepTime"})
 	@Test
-	public void tc_02_Login_Success(String userName, String password) 
+	public void tc_02_Login_Success(String userName, String password, String sleepTime) 
 	throws InterruptedException 
 	{
 		driver.findElement(usernametxt).sendKeys(userName);
 		driver.findElement(passwordtxt).sendKeys(password);
-		Thread.sleep(2000);
+		Thread.sleep(Integer.valueOf(sleepTime));
 		driver.findElement(loginbtn).click();
-		
 	}
 	
 

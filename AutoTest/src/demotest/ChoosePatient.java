@@ -59,107 +59,99 @@ public class ChoosePatient
 	By suathongtincachup = By.xpath("//ul[contains(@style,'width')]//li[text()=' Sửa thông tin ca chụp']");
 	
 	
-	@Parameters({"url"})
+	@Parameters({"url", "timeOut"})
 	@BeforeClass
-	public void beforeClass(String url) 
+	public void beforeClass(String url, String timeOut) 
 	{
 		System.setProperty("webdriver.chrome.driver", "lib\\chromedriver.exe");
 		// 1. Open browser
 		driver = new ChromeDriver();
 		// 2. Open website
 		driver.get(url);
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		// wait for element visible 30s
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Integer.valueOf(timeOut), TimeUnit.SECONDS);
 
 		js = (JavascriptExecutor) driver;
 	}
 	
-	// Test case 3: chọn bệnh nhân, vào pacsviewer
-	@Parameters({"maBn", "userName", "password"})
+	// Test case 3: chá»�n bá»‡nh nhÃ¢n, vÃ o pacsviewer
+	@Parameters({"maBn", "userName", "password", "sleepTime"})
 	@Test
-	public void tc_03_Pacs_Viewer(String maBn, String userName, String password)
+	public void tc_03_Pacs_Viewer(String maBn, String userName, String password, String sleepTime)
 	throws Exception
 	{
 			
-			// Đăng nhập thông tin đúng
+			// Ä�Äƒng nháº­p thÃ´ng tin Ä‘Ãºng
 			driver.findElement(usernametxt).sendKeys(userName);
 			driver.findElement(passwordtxt).sendKeys(password);
 			driver.findElement(loginbtn).click();
 			
 			try {
-				// vào danh sách ca chụp
+				// vÃ o danh sÃ¡ch ca chá»¥p
 				driver.findElement(By.xpath("//i[@class='icon-loop']")).click();
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				Assert.assertTrue(driver.findElement(boloctimkiem).isDisplayed());
 				driver.findElement(boloctimkiem).click();
-				Thread.sleep(3000);
-				rs.put("vào danh sách ca chụp","Pass");
+				Thread.sleep(Integer.valueOf(sleepTime));
 			} catch (Exception e) {
-				rs.put("vào danh sách ca chụp","Fail");
 			}
 			
 			try {
-				// chọn tìm theo mã bệnh nhân ở dropdown
+				// chá»�n tÃ¬m theo mÃ£ bá»‡nh nhÃ¢n á»Ÿ dropdown
 				WebElement mabenhnhan = driver.findElement(mabenhnhanDropdown);
 				select = new Select(mabenhnhan);
 				select.selectByVisibleText("Mã bệnh nhân");
 				driver.findElement(By.xpath("//input[@id='txtCustom1']")).sendKeys(maBn);
 				driver.findElement(By.xpath("//a[@id='btnSearch']")).click();
-				Thread.sleep(3000);
-				rs.put("chọn tìm theo mã bệnh nhân ở dropdown","Pass");
+				Thread.sleep(Integer.valueOf(sleepTime));
 			} catch (Exception e) {
-				rs.put("chọn tìm theo mã bệnh nhân ở dropdown","Fail");
 			}
 			
 			// try {
-				// // tìm kiếm bệnh nhân đã chụp
+				// // tÃ¬m kiáº¿m bá»‡nh nhÃ¢n Ä‘Ã£ chá»¥p
 				// driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::span")).click();
 				// Thread.sleep(1000);
-				// driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::ul/li[text()='Đã chụp']")).click();		
+				// driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::ul/li[text()='Ä�Ã£ chá»¥p']")).click();		
 				// Thread.sleep(1000);
 				// driver.findElement(By.xpath("//a[@id='btnSearch']"));
-				// rs.put("tìm kiếm bệnh nhân đã chụp","Pass");
+				// rs.put("tÃ¬m kiáº¿m bá»‡nh nhÃ¢n Ä‘Ã£ chá»¥p","Pass");
 			// } catch (Exception e) {
-				// rs.put("tìm kiếm bệnh nhân đã chụp","Fail");
+				// rs.put("tÃ¬m kiáº¿m bá»‡nh nhÃ¢n Ä‘Ã£ chá»¥p","Fail");
 			// }
 
 			try {
-				// Click chuột để vào pacsviewer
+				// Click chuá»™t Ä‘á»ƒ vÃ o pacsviewer
 				Actions actions = new Actions(driver);
 				WebElement trangthai = driver.findElement(trangthaiduyet);
 				actions.doubleClick(trangthai).perform();
-				Thread.sleep(2000);
-				rs.put("Click chuột để vào pacsviewer","Pass");
+				Thread.sleep(Integer.valueOf(sleepTime));
 				
 			} catch (Exception e) {
-				rs.put("Click chuột để vào pacsviewer","Fail");
 			}
 			
 			try {
-				// Chỉnh sáng tối
+				// Chá»‰nh sÃ¡ng tá»‘i
 				WebElement iframeView = driver.findElement(By.xpath("//iframe[@id='icase-study-0']"));
 				driver.switchTo().frame(iframeView);
 				driver.findElement(By.xpath("//*[@id='common']/*[@id='common-icons']/a[11]")).click();
-				Thread.sleep(3000);
+				Thread.sleep(Integer.valueOf(sleepTime));
 				driver.findElement(By.xpath("//*[@id='div-prefix-window']/ul/li[9]")).click();
-				Thread.sleep(3000);
-				rs.put("Chỉnh sáng tối","Pass");
+				Thread.sleep(Integer.valueOf(sleepTime));
 			} catch (Exception e) {
-				rs.put("Chỉnh sáng tối","Fail");
 			}
 			
 			
 			
-		    // Quay lại trạng thái ban đầu
+		    // Quay láº¡i tráº¡ng thÃ¡i ban Ä‘áº§u
 			driver.findElement(By.xpath("//*[@id='common-icons']/a[17]")).click();
-			Thread.sleep(3000);
+			Thread.sleep(Integer.valueOf(sleepTime));
 			
 			
-			// Đóng Pacsviewer
+			// Ä�Ã³ng Pacsviewer
 			driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-close']")).click();
 			driver.switchTo().defaultContent();
-			Thread.sleep(2000);
+			Thread.sleep(Integer.valueOf(sleepTime));
 	}
 
 	

@@ -52,9 +52,9 @@ public class EditInformation
 	By boloctimkiem = By.xpath("//a[@id='root1_anchor']");
 	By suathongtincachup = By.xpath("//ul[contains(@style,'width')]//li[text()=' Sửa thông tin ca chụp']");
 
-	@Parameters({"url"})
+	@Parameters({"url", "timeOut"})
 	@BeforeClass
-	public void beforeClass(String url) 
+	public void beforeClass(String url, String timeOut) 
 	{
 		System.setProperty("webdriver.chrome.driver", "lib\\chromedriver.exe");
 		// 1. Open browser
@@ -63,55 +63,51 @@ public class EditInformation
 		driver.get(url);
 		driver.manage().window().maximize();
 		// wait for element visible 30s
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Integer.valueOf(timeOut), TimeUnit.SECONDS);
 
 		js = (JavascriptExecutor) driver;
 	}
 
 	// Test case 4: sua thong tin ca chup khong thanh cong
-	@Parameters({"maBn", "newName","maBnMoi","userName","password"})
+	@Parameters({"maBn", "newName","maBnMoi","userName","password", "sleepTime"})
 	@Test
-	public void tc_04_Sua_Thong_Tin_Ca_Chup(String maBn, String newName, String maBnMoi, String userName, String password) 
+	public void tc_04_Sua_Thong_Tin_Ca_Chup(String maBn, String newName, String maBnMoi, String userName, String password, String sleepTime) 
 	throws Exception 
 	{
-		// Đăng nhập thông tin đúng
 		driver.findElement(usernametxt).sendKeys(userName);
 		driver.findElement(passwordtxt).sendKeys(password);
 		driver.findElement(loginbtn).click();
-		// vào danh sách ca chụp
 		driver.findElement(By.xpath("//i[@class='icon-loop']")).click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		Assert.assertTrue(driver.findElement(boloctimkiem).isDisplayed());
 		driver.findElement(boloctimkiem).click();
-		Thread.sleep(3000);
-		
-		// chọn tìm theo mã bệnh nhân ở dropdown
+		Thread.sleep(Integer.valueOf(sleepTime));
 		WebElement mabenhnhan = driver.findElement(mabenhnhanDropdown);
 		select = new Select(mabenhnhan);
 		select.selectByVisibleText("Mã bệnh nhân");
 		driver.findElement(By.xpath("//input[@id='txtCustom1']")).sendKeys(maBn);
 		driver.findElement(By.xpath("//a[@id='btnSearch']")).click();
-		Thread.sleep(3000);
+		Thread.sleep(Integer.valueOf(sleepTime));
 
-		// tìm kiếm bệnh nhân đã chụp
+		// tÃ¬m kiáº¿m bá»‡nh nhÃ¢n Ä‘Ã£ chá»¥p
 		driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::span")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::ul/li[text()='Đã chụp']")).click();		
-		Thread.sleep(1000);
+		Thread.sleep(Integer.valueOf(sleepTime));
+		driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::ul/li[text()='Ä�Ã£ chá»¥p']")).click();		
+		Thread.sleep(Integer.valueOf(sleepTime));
 		driver.findElement(By.xpath("//a[@id='btnSearch']"));
 		
-		// click chuột phải, chọn Sửa thông tin ca chụp
+		// click chuá»™t pháº£i, chá»�n Sá»­a thÃ´ng tin ca chá»¥p
 		Actions actions = new Actions(driver);
 		WebElement trangthai = driver.findElement(trangthaiduyet);
 		actions.contextClick(trangthai).perform();
-		Thread.sleep(1000);
+		Thread.sleep(Integer.valueOf(sleepTime));
 
 		driver.findElement(suathongtincachup).click();
 //		Assert.assertTrue(driver.findElement(By.xpath("//ul[contains(@style,'width')]/li[2]")).isDisplayed());
 //		driver.findElement(By.xpath("//ul[contains(@style,'width')]/li[2]")).click();
-		Thread.sleep(3000);
+		Thread.sleep(Integer.valueOf(sleepTime));
 
-		// điền thông tin bệnh nhân
+		// Ä‘iá»�n thÃ´ng tin bá»‡nh nhÃ¢n
 		driver.findElement(mabenhnhan1).sendKeys(maBnMoi);
 		driver.findElement(tenbenhnhan).sendKeys("");
 		driver.findElement(tuoi).sendKeys("40");
@@ -125,24 +121,22 @@ public class EditInformation
 		driver.findElement(bacsichidinh).sendKeys("Hua An");
 		
 		driver.findElement(By.xpath("//a[@class='btn green pull-right']")).click();
-		Thread.sleep(4000);
+		Thread.sleep(Integer.valueOf(sleepTime) + 500);
 		
-		// popup cảnh báo xuất hiện
+		// popup cáº£nh bÃ¡o xuáº¥t hiá»‡n
 //		System.out.println(driver.findElement(errormsg).getText());
 //		Assert.assertTrue(driver.findElement(errormsg).isDisplayed());
 //		Assert.assertEquals(driver.findElement(errormsg).getText(), "Ten benh nhan khong duoc rong.");
 //		Thread.sleep(2000);
 		
-		// điền thêm tên bệnh nhân
+		// Ä‘iá»�n thÃªm tÃªn bá»‡nh nhÃ¢n
 		driver.findElement(tenbenhnhan).sendKeys(newName);
 		driver.findElement(By.xpath("//a[@class='btn green pull-right']")).click();
-		Thread.sleep(2000);
-		// điền lý do và nhấn ok
-		driver.findElement(By.xpath("//input[@placeholder='Lý do']")).sendKeys("Hoi lam gi");
-		driver.findElement(By.xpath("//button[text()='Đồng ý']")).click();
-		Thread.sleep(2000);
-		
-
+		Thread.sleep(Integer.valueOf(sleepTime));
+		// Ä‘iá»�n lÃ½ do vÃ  nháº¥n ok
+		driver.findElement(By.xpath("//input[@placeholder='LÃ½ do']")).sendKeys("Hoi lam gi");
+		driver.findElement(By.xpath("//button[text()='Ä�á»“ng Ã½']")).click();
+		Thread.sleep(Integer.valueOf(sleepTime));
 	}
 	
 

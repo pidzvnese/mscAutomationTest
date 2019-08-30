@@ -52,9 +52,9 @@ public class WriteReport
 	By boloctimkiem = By.xpath("//a[@id='root1_anchor']");
 	By suathongtincachup = By.xpath("//ul[contains(@style,'width')]//li[text()=' Sửa thông tin ca chụp']");
 
-	@Parameters({"url"})
+	@Parameters({"url", "timeOut"})
 	@BeforeClass
-	public void beforeClass(String url) 
+	public void beforeClass(String url, String timeOut) 
 	{
 		System.setProperty("webdriver.chrome.driver", "lib\\chromedriver.exe");
 		// 1. Open browser
@@ -63,66 +63,66 @@ public class WriteReport
 		driver.get(url);
 		driver.manage().window().maximize();
 		// wait for element visible 30s
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Integer.valueOf(timeOut), TimeUnit.SECONDS);
 
 		js = (JavascriptExecutor) driver;
 	}
 
-	// Testcase 5: Viết báo cáo
-	@Parameters({"tenBn", "userName", "password"})
+	// Testcase 5: Viáº¿t bÃ¡o cÃ¡o
+	@Parameters({"tenBn", "userName", "password", "sleepTime"})
 	@Test
-	public void tc_05_Viet_Bao_Cao_Ca_Chup(String tenBn, String userName, String password) 
+	public void tc_05_Viet_Bao_Cao_Ca_Chup(String tenBn, String userName, String password, String sleepTime) 
 	throws Exception
 	{
-		// Test case 2: Đăng nhập thông tin đúng
+		// Test case 2: Ä�Äƒng nháº­p thÃ´ng tin Ä‘Ãºng
 		driver.findElement(usernametxt).sendKeys(userName);
 		driver.findElement(passwordtxt).sendKeys(password);
 		driver.findElement(loginbtn).click();
-		// vào danh sách ca chụp
+		// vÃ o danh sÃ¡ch ca chá»¥p
 		driver.findElement(By.xpath("//i[@class='icon-loop']")).click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		Assert.assertTrue(driver.findElement(boloctimkiem).isDisplayed());
 		driver.findElement(boloctimkiem).click();
-		Thread.sleep(3000);
+		Thread.sleep(Integer.valueOf(sleepTime) + 500);
 		driver.findElement(By.xpath("//*[@id='btnClear']")).click();
-		// Chọn tìm bệnh nhân mới sửa
+		// Chá»�n tÃ¬m bá»‡nh nhÃ¢n má»›i sá»­a
 		WebElement tenbenhnhan = driver.findElement(tenbenhnhanDropdown);
 		select = new Select(tenbenhnhan);
-		select.selectByVisibleText("Tên bệnh nhân");
+		select.selectByVisibleText("Têm bệnh nhân");
 		driver.findElement(By.xpath("//input[@id='txtCustom1']")).sendKeys(tenBn);
 		driver.findElement(By.xpath("//a[@id='btnSearch']")).click();
-		Thread.sleep(3000);
+		Thread.sleep(Integer.valueOf(sleepTime) + 500);
 			
-		// tìm kiếm bệnh nhân đã chụp
+		// tÃ¬m kiáº¿m bá»‡nh nhÃ¢n Ä‘Ã£ chá»¥p
 		driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::span")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::ul/li[text()='Đã chụp']")).click();
-		Thread.sleep(1000);
+		Thread.sleep(Integer.valueOf(sleepTime));
+		driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::ul/li[text()='Ä�Ã£ chá»¥p']")).click();
+		Thread.sleep(Integer.valueOf(sleepTime));
 		driver.findElement(By.xpath("//a[@id='btnSearch']"));
 	
-		// Click vào bệnh nhân để thực hiện viết báo cáo
+		// Click vÃ o bá»‡nh nhÃ¢n Ä‘á»ƒ thá»±c hiá»‡n viáº¿t bÃ¡o cÃ¡o
 		driver.findElement(By.xpath("//*[@id='gridPerson']/div[2]/div[1]/table/tbody/tr[1]/td[2]")).click();
 		
-		// viết báo cáo và duyệt		
+		// viáº¿t bÃ¡o cÃ¡o vÃ  duyá»‡t		
 		Actions actions = new Actions(driver);
 		actions.doubleClick(driver.findElement(By.xpath("//*[@id='txtnReading']"))).perform();
 		driver.findElement(By.xpath("//*[@id='txtnReading']")).sendKeys(report);
 		driver.findElement(By.xpath("//*[@id='btn-save']")).click();
-		Thread.sleep(5000);
+		Thread.sleep(Integer.valueOf(sleepTime) + 1000);
 		driver.findElement(By.xpath("//span[@class='btn green btn-approved']")).click();
 		driver.findElement(By.xpath("//a[@id='btnSearch']")).click();
-		Thread.sleep(3000);
+		Thread.sleep(Integer.valueOf(sleepTime));
 		
-		// Tìm kiếm bệnh nhân đã duyệt
+		// TÃ¬m kiáº¿m bá»‡nh nhÃ¢n Ä‘Ã£ duyá»‡t
 		driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::span")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::ul/li[text()='Đã duyệt']")).click();
-		Thread.sleep(1000);
+		Thread.sleep(Integer.valueOf(sleepTime) - 500);
+		driver.findElement(By.xpath("//input[@id='txtCustom4']/following-sibling::ul/li[text()='Ä�Ã£ duyá»‡t']")).click();
+		Thread.sleep(Integer.valueOf(sleepTime) - 500);
 		driver.findElement(By.xpath("//a[@id='btnSearch']"));
 		
-		// Bỏ duyệt ca chụp
+		// Bá»� duyá»‡t ca chá»¥p
 		driver.findElement(By.xpath("//*[@id=\"btnUnapprove\"]")).click();
-
+		Thread.sleep(Integer.valueOf(sleepTime) - 500);
 	}
 	
 

@@ -5,10 +5,12 @@
   	<parameter name = "userName" value="%userName%"/> 
   	<parameter name = "password" value="%password%"/>
   	<parameter name = "url" value="%url%"/> 
-  	<parameter name = "maBn" value="%maBn%"/>
   	<parameter name = "maBnMoi" value="%maBnMoi%"/>
+  	<parameter name = "maBn" value="%maBn%" />
   	<parameter name = "newName" value="%newName%"/>
   	<parameter name = "tenBn" value="%tenBn%"/>
+  	<parameter name = "timeOut" value="%timeOut%"/>
+  	<parameter name = "sleepTime" value="%sleepTime%"/>
     <classes>
       <class name="demotest.ChoosePatient"/>
     </classes>
